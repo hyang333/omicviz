@@ -19,5 +19,6 @@ Imports:
     png,
     circlize
 Suggests:
+    rsvg,
     testthat (>= 3.0.0)
 biocViews: Visualization, MotifDiscovery

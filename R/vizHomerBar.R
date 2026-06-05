@@ -20,7 +20,7 @@
 #' @param title Character. Title for the plot. Default is
 #'   \code{"HOMER Known Motif Enrichment"}.
 #' @param logo_width \code{grid::unit} object. Width of the motif logo column.
-#'   Default is \code{unit(2, "cm")}.
+#'   Default is \code{unit(4, "cm")}.
 #' @param bar_width \code{grid::unit} object. Width of each bar plot column.
 #'   Default is \code{unit(4, "cm")}.
 #' @param row_height \code{grid::unit} object. Height of each row.
@@ -46,7 +46,7 @@ vizHomerBar <- function(homer_data,
                         pvalue_col = "#2166AC",
                         target_col = "#B2182B",
                         title = "HOMER Known Motif Enrichment",
-                        logo_width = grid::unit(2, "cm"),
+                        logo_width = grid::unit(4, "cm"),
                         bar_width = grid::unit(4, "cm"),
                         row_height = grid::unit(8, "mm"),
                         ...) {
@@ -90,7 +90,7 @@ vizHomerBar <- function(homer_data,
   anno_tf <- anno_text(
     x = tf_names,
     which = "row",
-    gp = gpar(fontsize = 8),
+    gp = gpar(fontsize = 12),
     width = name_width
   )
 
@@ -101,9 +101,12 @@ vizHomerBar <- function(homer_data,
   if (any(logo_exists)) {
     # Use anno_image for logos that exist; NA for missing ones
     logo_paths <- ifelse(logo_exists, logos, NA_character_)
+    # Convert SVG files to temporary PNGs to avoid grImport2 warnings
+    logo_paths <- .convert_svg_to_png(logo_paths)
     anno_logo <- anno_image(
       logo_paths,
       which = "row",
+      border = FALSE,
       width = logo_width,
       space = unit(1, "mm")
     )
@@ -177,4 +180,52 @@ vizHomerBar <- function(homer_data,
   draw(ht, ...)
 
   invisible(ht)
+}
+
+
+#' Convert SVG logo files to temporary PNG files
+#'
+#' Avoids grImport2 \code{checkValidSVG} warnings by converting SVG files
+#' to raster PNG using the \pkg{rsvg} package. If \pkg{rsvg} is not
+#' installed, PNG files in the HOMER directory are used as fallback.
+#'
+#' @param logo_paths Character vector of logo file paths (may include
+#'   PNG, SVG, or NA values).
+#' @return Character vector of file paths with SVGs replaced by temp PNGs.
+#' @keywords internal
+.convert_svg_to_png <- function(logo_paths) {
+  svg_idx <- which(grepl("\\.svg$", logo_paths, ignore.case = TRUE) &
+                   !is.na(logo_paths))
+  if (length(svg_idx) == 0) return(logo_paths)
+
+  # Try to find matching .logo.png files first (HOMER often generates both)
+  for (i in svg_idx) {
+    png_alt <- sub("\\.svg$", ".png", logo_paths[i], ignore.case = TRUE)
+    if (file.exists(png_alt)) {
+      logo_paths[i] <- png_alt
+    }
+  }
+
+  # Re-check which are still SVGs
+  svg_idx <- which(grepl("\\.svg$", logo_paths, ignore.case = TRUE) &
+                   !is.na(logo_paths))
+  if (length(svg_idx) == 0) return(logo_paths)
+
+  # Convert remaining SVGs to temp PNGs using rsvg
+  if (requireNamespace("rsvg", quietly = TRUE)) {
+    for (i in svg_idx) {
+      tmp_png <- tempfile(fileext = ".png")
+      tryCatch({
+        rsvg::rsvg_png(logo_paths[i], file = tmp_png, width = 400)
+        logo_paths[i] <- tmp_png
+      }, error = function(e) {
+        warning(sprintf("Failed to convert SVG to PNG: %s", logo_paths[i]))
+      })
+    }
+  } else {
+    message("Tip: install the 'rsvg' package to avoid SVG rendering warnings: ",
+            "install.packages('rsvg')")
+  }
+
+  return(logo_paths)
 }

@@ -16,7 +16,7 @@ results using \pkg{ComplexHeatmap}. The plot contains five columns:
 vizHomerBar(homer_data, top_n = 20, pvalue_col = "#2166AC",
             target_col = "#B2182B",
             title = "HOMER Known Motif Enrichment",
-            logo_width = grid::unit(2, "cm"), bar_width = grid::unit(4, "cm"),
+            logo_width = grid::unit(4, "cm"), bar_width = grid::unit(4, "cm"),
             row_height = grid::unit(8, "mm"), ...)
 }
 \arguments{
@@ -30,7 +30,7 @@ vizHomerBar(homer_data, top_n = 20, pvalue_col = "#2166AC",
   \item{title}{Character. Title for the plot. Default is
     \code{"HOMER Known Motif Enrichment"}.}
   \item{logo_width}{\code{grid::unit} object. Width of the motif logo column.
-    Default is \code{unit(2, "cm")}.}
+    Default is \code{unit(4, "cm")}.}
   \item{bar_width}{\code{grid::unit} object. Width of each bar plot column.
     Default is \code{unit(4, "cm")}.}
   \item{row_height}{\code{grid::unit} object. Height of each row.
