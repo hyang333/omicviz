@@ -2,7 +2,7 @@ Package: homerviz
 Title: Visualization of HOMER Known Motif Discovery Results
 Version: 0.1.0
 Authors@R: 
-    person("Author", "Name", email = "author@example.com", role = c("aut", "cre"))
+    person("Author", "Huan Yang", email = "hyang333@wisc.edu", role = c("aut", "cre"))
 Description: Parses and visualizes HOMER known motif discovery results. 
     Provides an S4 class 'HomerData' to store parsed results and functions 
     to create publication-quality ComplexHeatmap visualizations including 

@@ -19,12 +19,12 @@
 #'   Default is \code{"#B2182B"} (red).
 #' @param title Character. Title for the plot. Default is
 #'   \code{"HOMER Known Motif Enrichment"}.
-#' @param logo_width \code{grid::unit} object. Width of the motif logo column.
-#'   Default is \code{unit(4, "cm")}.
-#' @param bar_width \code{grid::unit} object. Width of each bar plot column.
-#'   Default is \code{unit(4, "cm")}.
-#' @param row_height \code{grid::unit} object. Height of each row.
-#'   Default is \code{unit(8, "mm")}.
+#' @param logo_width Numeric. Width of the motif logo column in cm.
+#'   Default is 3.
+#' @param bar_width Numeric. Width of each bar plot column in cm.
+#'   Default is 3.
+#' @param row_height Numeric. Height of each row in mm.
+#'   Default is 6.
 #' @param ... Additional arguments passed to \code{ComplexHeatmap::draw()}.
 #'
 #' @return A \code{ComplexHeatmap::Heatmap} object (invisibly). The plot is
@@ -42,14 +42,19 @@
 #' @importFrom circlize colorRamp2
 #' @export
 vizHomerBar <- function(homer_data,
-                        top_n = 20,
+                        top_n = NULL,
                         pvalue_col = "#2166AC",
                         target_col = "#B2182B",
                         title = "HOMER Known Motif Enrichment",
-                        logo_width = grid::unit(4, "cm"),
-                        bar_width = grid::unit(4, "cm"),
-                        row_height = grid::unit(8, "mm"),
+                        logo_width = 3,
+                        bar_width = 3,
+                        row_height = 6,
                         ...) {
+
+  # Convert numeric parameters to grid units
+  logo_width <- grid::unit(logo_width, "cm")
+  bar_width <- grid::unit(bar_width, "cm")
+  row_height <- grid::unit(row_height, "mm")
 
   # --- Validate input ---
   if (!is(homer_data, "HomerData")) {
