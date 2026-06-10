@@ -172,8 +172,8 @@ vizVolcano <- function(
   x_mid_up_low    <- (0 + lfc_threshold) / 2
   x_mid_up_high   <- (lfc_threshold + x_hi) / 2
 
-  # Y position for count labels: 1/5 of the y-axis height
-  y_label <- y_lo + (y_hi - y_lo) * 0.20
+  # Y position for count labels: near top with margin
+  y_label <- y_lo + (y_hi - y_lo) * 0.90
 
   # Build annotation data.frame
   count_labels <- data.frame(
@@ -198,6 +198,8 @@ vizVolcano <- function(
       alpha = point_alpha
     ) +
     ggplot2::scale_color_manual(values = color_map, guide = "none") +
+    # Expand y-axis so count labels at top are fully visible
+    ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = c(0.02, 0.10))) +
     # Vertical LFC threshold lines
     ggplot2::geom_vline(
       xintercept = c(-lfc_threshold, lfc_threshold),
