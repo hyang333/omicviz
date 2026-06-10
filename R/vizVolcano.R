@@ -34,6 +34,9 @@
 #'   Default is \code{0.7}.
 #' @param border_width Numeric. Line width for axis lines and ticks.
 #'   Default is \code{0.4}.
+#' @param count_y_position Numeric between 0 and 1. Vertical position of the
+#'   zone count labels as a fraction of the y-axis range (0 = bottom,
+#'   1 = top). Default is \code{0.75}.
 #' @param title Character. Plot title. Default is \code{"Volcano Plot"}.
 #' @param xlab Character or expression. X-axis label. Default is
 #'   \code{"log2(Fold Change)"}.
@@ -74,6 +77,7 @@ vizVolcano <- function(
   point_size = 1.2,
   point_alpha = 0.7,
   border_width = 0.4,
+  count_y_position = 0.75,
   title = "Volcano Plot",
   xlab = "log2(Fold Change)",
   ylab = expression(-log[10]~italic(FDR)),
@@ -172,8 +176,8 @@ vizVolcano <- function(
   x_mid_up_low    <- (0 + lfc_threshold) / 2
   x_mid_up_high   <- (lfc_threshold + x_hi) / 2
 
-  # Y position for count labels: 3/4 of the y-axis height
-  y_label <- y_lo + (y_hi - y_lo) * 0.75
+  # Y position for count labels
+  y_label <- y_lo + (y_hi - y_lo) * count_y_position
 
   # Build annotation data.frame
   count_labels <- data.frame(
