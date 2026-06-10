@@ -1,4 +1,4 @@
-# homerviz
+# omicviz
 
 Visualization of HOMER Known Motif Discovery Results.
 
@@ -10,17 +10,17 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("ComplexHeatmap")
 
-# Install homerviz from local source
-install.packages("/path/to/homerviz", repos = NULL, type = "source")
+# Install omicviz from local source
+install.packages("/path/to/omicviz", repos = NULL, type = "source")
 
 # Or using devtools
-devtools::install_local("/path/to/homerviz")
+devtools::install_local("/path/to/omicviz")
 ```
 
 ## Usage
 
 ```r
-library(homerviz)
+library(omicviz)
 
 # 1. Read HOMER known motif results
 homer_data <- readHomerDir("/path/to/homer/output")

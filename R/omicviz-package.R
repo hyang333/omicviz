@@ -1,6 +1,6 @@
-#' homerviz: Visualization of HOMER Known Motif Discovery Results
+#' omicviz: Visualization of HOMER Known Motif Discovery Results
 #'
-#' The homerviz package provides tools to parse and visualize HOMER known
+#' The omicviz package provides tools to parse and visualize HOMER known
 #' motif discovery results. It creates publication-quality ComplexHeatmap
 #' plots showing motif rank, transcription factor names, motif logos,
 #' significance, and target enrichment.
@@ -20,6 +20,6 @@
 #' }
 #'
 #' @docType package
-#' @name homerviz-package
-#' @aliases homerviz
+#' @name omicviz-package
+#' @aliases omicviz
 NULL

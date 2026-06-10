@@ -1,4 +1,4 @@
-Package: homerviz
+Package: omicviz
 Title: Visualization of HOMER Known Motif Discovery Results
 Version: 0.1.0
 Authors@R: 
