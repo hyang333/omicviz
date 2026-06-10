@@ -11,6 +11,8 @@
 #'     return a \code{HomerData} object.}
 #'   \item{\code{\link{vizHomerBar}}}{Create a ComplexHeatmap visualization
 #'     of known motif enrichment results.}
+#'   \item{\code{\link{vizVolcano}}}{Create a volcano plot from DESeq2
+#'     differential expression results.}
 #' }
 #'
 #' @section Class:

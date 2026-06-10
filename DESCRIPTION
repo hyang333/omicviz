@@ -3,22 +3,25 @@ Title: Visualization of HOMER Known Motif Discovery Results
 Version: 0.1.0
 Authors@R: 
     person("Author", "Huan Yang", email = "hyang333@wisc.edu", role = c("aut", "cre"))
-Description: Parses and visualizes HOMER known motif discovery results. 
-    Provides an S4 class 'HomerData' to store parsed results and functions 
-    to create publication-quality ComplexHeatmap visualizations including 
-    motif rank, transcription factor names, motif logos, significance 
-    (-log P-value), and target percentage bar plots.
+Description: Parses and visualizes HOMER known motif discovery results and
+    DESeq2 differential expression results. Provides an S4 class 'HomerData'
+    to store parsed results and functions to create publication-quality
+    ComplexHeatmap visualizations including motif rank, transcription factor
+    names, motif logos, significance (-log P-value), and target percentage
+    bar plots. Also provides volcano plot visualization for DESeq2 results.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Imports:
     methods,
     ComplexHeatmap,
     grid,
     png,
-    circlize
+    circlize,
+    ggplot2
 Suggests:
     rsvg,
+    ggrepel,
     testthat (>= 3.0.0)
 biocViews: Visualization, MotifDiscovery
+Config/roxygen2/version: 8.0.0
