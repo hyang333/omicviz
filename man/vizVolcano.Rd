@@ -8,12 +8,20 @@ vizVolcano(
   res,
   lfc_threshold = 1,
   padj_cutoff = 0.05,
-  col_up = "#E41A1C",
-  col_low = "#6BAED6",
+  col_up_high = "#E41A1C",
+  col_up_low = "#FB9A99",
+  col_down_high = "#1F78B4",
+  col_down_low = "#A6CEE3",
   col_ns = "grey70",
   point_size = 1.2,
   point_alpha = 0.7,
-  border_width = 0.4,
+  border_width = 0.2,
+  count_y_position = 0.95,
+  shade_alpha = 0.04,
+  label_size = 3,
+  full_border = TRUE,
+  top_n_labels = 10,
+  label_arrows = TRUE,
   title = "Volcano Plot",
   xlab = "log2(Fold Change)",
   ylab = expression(-log[10] ~ italic(FDR)),
@@ -34,12 +42,18 @@ separate "large" from "small" significant changes. Default is \code{1}.}
 \item{padj_cutoff}{Numeric. Adjusted p-value cutoff for significance.
 Default is \code{0.05}.}
 
-\item{col_up}{Character. Color for significant genes with
-\code{|log2FoldChange| > lfc_threshold}. Default is \code{"#E41A1C"}
-(red).}
+\item{col_up_high}{Character. Color for significant genes with
+\code{log2FoldChange > lfc_threshold}. Default is \code{"#E41A1C"} (red).}
 
-\item{col_low}{Character. Color for significant genes with
-\code{|log2FoldChange| <= lfc_threshold}. Default is \code{"#6BAED6"}
+\item{col_up_low}{Character. Color for significant genes with
+\code{0 <= log2FoldChange <= lfc_threshold}. Default is \code{"#FB9A99"}
+(light red).}
+
+\item{col_down_high}{Character. Color for significant genes with
+\code{log2FoldChange < -lfc_threshold}. Default is \code{"#1F78B4"} (blue).}
+
+\item{col_down_low}{Character. Color for significant genes with
+\code{-lfc_threshold <= log2FoldChange < 0}. Default is \code{"#A6CEE3"}
 (light blue).}
 
 \item{col_ns}{Character. Color for non-significant genes.
@@ -52,6 +66,25 @@ Default is \code{0.7}.}
 
 \item{border_width}{Numeric. Line width for axis lines and ticks.
 Default is \code{0.4}.}
+
+\item{count_y_position}{Numeric between 0 and 1. Vertical position of the
+zone count labels as a fraction of the y-axis range (0 = bottom,
+1 = top). Default is \code{0.95}.}
+
+\item{shade_alpha}{Numeric. Alpha transparency for the zone background
+shading (0 = invisible, 1 = opaque). Default is \code{0.04}.}
+
+\item{label_size}{Numeric. Font size for gene labels when \code{label_genes}
+is used, or when \code{top_n_labels > 0}. Default is \code{3}.}
+
+\item{full_border}{Logical. If \code{TRUE}, use a fully closed box border.
+If \code{FALSE}, use half open (L-shaped) border. Default is \code{TRUE}.}
+
+\item{top_n_labels}{Integer. Number of most significant genes (by padj) to
+label. Default is \code{10}. If 0, no top genes are labeled.}
+
+\item{label_arrows}{Logical. Whether to use arrows to connect gene labels to
+their points. Default is \code{TRUE}.}
 
 \item{title}{Character. Plot title. Default is \code{"Volcano Plot"}.}
 
